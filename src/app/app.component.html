@@ -1,4 +1,125 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<h1>Candidates</h1>
+<div class="form-check form-check-inline">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    id="inlineCheckbox1"
+    value="option1"
+    (change)="filterOnGender(list);"
+    [(ngModel)]="male"
+  />
+  <label class="form-check-label" for="inlineCheckbox1">Male</label>
+</div>
+<div class="form-check form-check-inline">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    id="inlineCheckbox2"
+    value="option2"
+    (change)="filterOnGender(list);"
+    [(ngModel)]="female"
+  />
+  <label class="form-check-label" for="inlineCheckbox2">Female</label>
+</div>
+
+<div class="form-group">
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="searchText"
+    class="form-control"
+    id="inputAddress"
+    placeholder="search"
+  />
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let obj of list  | searchFilter:searchText">
+      <th scope="row">{{ obj.id }}</th>
+      <td>{{ obj.firstName }}</td>
+      <td>{{ obj.lastName }}</td>
+      <td>{{ obj.email }}</td>
+      <td>{{ obj.gender }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>Add New Candidate</h1>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">First Name</label>
+      <input
+        type="text"
+        name="firstName"
+        [(ngModel)]="add.firstName"
+        class="form-control"
+        id="inputEmail4"
+        placeholder="First Name"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Last Name</label>
+      <input
+        type="text"
+        name="lastName"
+        [(ngModel)]="add.lastName"
+        class="form-control"
+        id="inputPassword4"
+        placeholder="Last Name"
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Email</label>
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="add.email"
+      class="form-control"
+      id="inputAddress"
+      placeholder="abc@gmail.com"
+    />
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <div class="form-group col-md-6">
+        <input
+          class="form-check-input"
+          [(ngModel)]="add.male"
+          name="male"
+          type="checkbox"
+          id="gridCheck"
+        />
+        <label class="form-check-label" for="gridCheck"> Male </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-group col-md-6">
+        <input
+          class="form-check-input"
+          name="female"
+          [(ngModel)]="add.female"
+          type="checkbox"
+          id="gridCheck"
+        />
+        <label class="form-check-label" for="gridCheck"> Female </label>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" (click)="addCandidate()" class="btn btn-primary">
+    Add
+  </button>
+</form>
